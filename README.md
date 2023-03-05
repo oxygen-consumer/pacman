@@ -53,5 +53,5 @@
 - [ ] tag de `git`: de exemplu `v0.3` sau `v1.0`
 
 ## Resurse
-
+- [SFML](https://github.com/SFML/SFML/tree/6aaf132d41e73e5bb64bf6c53f60a7d8ed4aeff7)
 - adăugați trimiteri către resursele externe care v-au ajutat sau pe care le-ați folosit

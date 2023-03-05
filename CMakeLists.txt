@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.24)
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing executable name in this file
 # for now, the project name is used as the executable name
-project(oop)
+project(pacman)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -59,28 +59,35 @@ endfunction()
 ###############################################################################
 
 # external dependencies with FetchContent
-#include(FetchContent)
-#
-# NOTE: Also update env vars used for caching in .github/workflows/cmake.yml
-#FetchContent_Declare(
-#        SomeLib
-#        GIT_REPOSITORY https://github.com/<SomeUser>/<SomeLib>.git
-#        GIT_TAG        <some_git_hash> # <which tag/branch @ <some_date>>
-#        GIT_SHALLOW    1  # works only with branches or tags, not with arbitrary commit hashes
-#)
-#
-#FetchContent_MakeAvailable(SomeLib)
+
+include(FetchContent)
+
+FETCHCONTENT_DECLARE(
+        SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 6aaf132d41e73e5bb64bf6c53f60a7d8ed4aeff7 # 2.6.x as of 2023-03-05
+)
+
+FETCHCONTENT_MAKEAVAILABLE(SFML)
+
+set_custom_stdlib_and_sanitizers(sfml-system false)
+set_custom_stdlib_and_sanitizers(sfml-window false)
+set_custom_stdlib_and_sanitizers(sfml-graphics false)
 
 ###############################################################################
 
 # external dependencies with find_package
 
-# find_package(Threads REQUIRED)
+find_package(Threads REQUIRED)
+if(APPLE)
+elseif(UNIX)
+    find_package(X11)
+endif()
 
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp src/Game.hpp src/Game.cpp)
 
 ###############################################################################
 
@@ -113,10 +120,14 @@ set_custom_stdlib_and_sanitizers(${PROJECT_NAME} true)
 ###############################################################################
 
 # use SYSTEM so clang-tidy does not report warnings from these directories
-#target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ext/<SomeHppLib>/include)
-#target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
-#target_link_directories(${PROJECT_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
-#target_link_libraries(${PROJECT_NAME} <SomeLib>)
+target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${SFML_SOURCE_DIR}/include)
+target_link_directories(${PROJECT_NAME} PRIVATE ${SFML_BINARY_DIR}/lib)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-window sfml-system Threads::Threads)
+
+if(APPLE)
+elseif(UNIX)
+    target_link_libraries(${PROJECT_NAME} X11)
+endif()
 
 ###############################################################################
 
