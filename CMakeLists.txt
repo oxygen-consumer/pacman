@@ -65,7 +65,7 @@ include(FetchContent)
 FETCHCONTENT_DECLARE(
         SFML
         GIT_REPOSITORY https://github.com/SFML/SFML.git
-        GIT_TAG 6aaf132d41e73e5bb64bf6c53f60a7d8ed4aeff7 # 2.6.x as of 2023-03-05
+        GIT_TAG a21c3c101cd02e41b79ffc515f93c649e230e263 # 2.6.x as of 2023-04-17
 )
 
 FETCHCONTENT_MAKEAVAILABLE(SFML)
