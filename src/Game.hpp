@@ -10,18 +10,23 @@
 
 
 /*
- * Singleton class which runs the game
- * TODO: Make it thread safe
+ * Game engine
+ * Singleton WITHOUT thread safety (not needed)
  */
 class Game {
 private:
-    static Game *_instance;
-
-    sf::RenderWindow *_window;
-    sf::VideoMode _video_mode;
-    sf::Event _ev{};
+    // Window
+    sf::RenderWindow *window;
+    const sf::VideoMode video_mode{400, 600};
 
     Game();
+
+    // Event handler
+    void poll_events();
+
+    void update();
+
+    void render();
 
 public:
     Game(Game &other) = delete;
@@ -30,9 +35,14 @@ public:
 
     ~Game();
 
-    static Game *get_instance();
+    inline static Game &get_instance() {
+        static Game instance;
+        return instance;
+    }
 
     void run();
+
+    bool running();
 };
 
 
