@@ -14,7 +14,8 @@ private:
     // animation stuff
     short animation_timer;
     const short animation_stages = 6;
-    const short death_animation_stages = 12;
+    // this will be used later
+    [[maybe_unused]] const short death_animation_stages = 12;
 
     short current_direction;
 

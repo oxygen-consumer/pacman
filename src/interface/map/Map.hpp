@@ -52,7 +52,7 @@ private:
     void load_map();
 
 public:
-    Map(const std::string &texture_path);
+    explicit Map(const std::string &texture_path);
 
     void update();
 
