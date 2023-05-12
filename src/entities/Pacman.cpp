@@ -4,49 +4,33 @@
 
 #include "Pacman.hpp"
 
-Pacman::Pacman(int x, int y) {
-    this->_x = x;
-    this->_y = y;
+Pacman::Pacman(const std::string &texture_path) {
+    this->init_texture(texture_path);
 
-    this->_is_alive = true;
-    this->_is_super = false;
-    this->_is_moving = false;
+    this->animation_timer = 0;
 
-    this->_direction = 0;
-    this->_speed = 1;
-    this->_super_time = 0;
+    this->current_direction = direction::RIGHT;
+
+    this->pos.set_x(9);
+    this->pos.set_y(15);
 }
 
-void Pacman::die() {
-    this->_is_alive = false;
-    // TODO: Implement death animation
+void Pacman::update() {
+    // select a texture based on the current direction and animation stage
+    short animation_stage = this->animation_timer / conf::ANIMATION_SPEED;
+    this->sprite.setTextureRect(
+            sf::IntRect(animation_stage * conf::CELL_SIZE, current_direction * conf::CELL_SIZE, conf::CELL_SIZE,
+                        conf::CELL_SIZE));
+
+    this->animation_timer++;
+    // reset the timer when it reaches the last animation stage
+    if (this->animation_timer == conf::ANIMATION_SPEED * this->animation_stages) {
+        this->animation_timer = 0;
+    }
+
+    this->sprite.setPosition(this->pos.get_x() * conf::CELL_SIZE_SCALED, this->pos.get_y() * conf::CELL_SIZE_SCALED);
 }
 
-void Pacman::eat() {
-    this->_score += 1;
-}
-
-void Pacman::super() {
-    this->_is_super = true;
-    this->_super_time = 0;
-}
-
-int Pacman::get_x() {
-    return this->_x;
-}
-
-int Pacman::get_y() {
-    return this->_y;
-}
-
-int Pacman::get_direction() {
-    return this->_direction;
-}
-
-void Pacman::set_direction(int direction) {
-    this->_direction = direction;
-}
-
-void Pacman::set_moving(bool moving) {
-    this->_is_moving = moving;
+void Pacman::render(sf::RenderTarget *target) {
+    target->draw(this->sprite);
 }

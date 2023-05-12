@@ -1,3 +1,4 @@
+
 //
 // Created by zaha on 3/5/23.
 //
@@ -5,12 +6,28 @@
 #include "Game.hpp"
 
 Game::Game() {
-    this->window = new sf::RenderWindow(this->video_mode, "Pacman", sf::Style::Titlebar | sf::Style::Close);
-    this->window->setVerticalSyncEnabled(true);
+    this->init_window();
+    this->init_map();
 }
 
 Game::~Game() {
     delete this->window;
+}
+
+void Game::init_window() {
+    this->video_mode = sf::VideoMode(conf::CELL_SIZE_SCALED * Map::get_map_width(),
+                                     conf::CELL_SIZE_SCALED * Map::get_map_height());
+    this->window = new sf::RenderWindow(this->video_mode, "Pacman", sf::Style::Titlebar | sf::Style::Close);
+    this->window->setFramerateLimit(60);
+    this->window->setVerticalSyncEnabled(false);
+}
+
+void Game::init_map() {
+    this->map = new Map("assets/Images/Map.png");
+
+    this->player = new Pacman("assets/Images/Pacman.png");
+
+    // TODO: Ghosts
 }
 
 bool Game::running() {
@@ -26,10 +43,19 @@ void Game::run() {
 
 void Game::update() {
     poll_events();
+
+    this->map->update();
+
+    this->player->update();
 }
 
 void Game::render() {
-    this->window->clear(sf::Color(255, 255, 0)); // test purposes
+    this->window->clear(sf::Color(0, 0, 0)); // test purposes
+
+    this->map->render(this->window);
+
+    this->player->render(this->window);
+
     this->window->display();
 }
 

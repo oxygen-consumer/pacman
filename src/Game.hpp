@@ -7,6 +7,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "entities/Pacman.hpp"
+#include "interface/map/Map.hpp"
 
 
 /*
@@ -17,7 +19,17 @@ class Game {
 private:
     // Window
     sf::RenderWindow *window;
-    const sf::VideoMode video_mode{400, 600};
+    sf::VideoMode video_mode{};
+
+    void init_window();
+
+    // Entities
+    Pacman *player;
+
+    // Map
+    Map *map;
+
+    void init_map();
 
     Game();
 
