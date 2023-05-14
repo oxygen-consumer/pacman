@@ -87,7 +87,7 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} main.cpp src/Game.hpp src/Game.cpp src/entities/Pacman.cpp src/entities/Pacman.hpp src/entities/Ghost.cpp src/entities/Ghost.hpp src/entities/Entity.hpp src/entities/Entity.cpp config.hpp src/interface/Interface.cpp src/interface/Interface.hpp src/interface/map/Map.cpp src/interface/map/Map.hpp src/utils/Position.hpp src/exceptions/FileNotFound.hpp src/exceptions/InvalidMap.hpp src/interface/map/CollisionDetection.hpp)
+add_executable(${PROJECT_NAME} main.cpp src/Game.hpp src/Game.cpp src/entities/Pacman.cpp src/entities/Pacman.hpp src/entities/Ghost.cpp src/entities/Ghost.hpp src/entities/Entity.hpp src/entities/Entity.cpp config.hpp src/interface/Interface.cpp src/interface/Interface.hpp src/interface/map/Map.cpp src/interface/map/Map.hpp src/utils/Position.hpp src/utils/exceptions/FileNotFound.hpp src/utils/exceptions/InvalidMap.hpp src/interface/map/CollisionDetection.hpp)
 
 ###############################################################################
 
