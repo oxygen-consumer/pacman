@@ -6,6 +6,8 @@
 #define PACMAN_POSITION_HPP
 
 
+#include <ostream>
+
 class Position {
 private:
     unsigned short x, y;
@@ -34,6 +36,28 @@ public:
         return this->y;
     };
 
+    Position(const Position &position) {
+        this->x = position.x;
+        this->y = position.y;
+    }
+
+    Position &operator=(const Position &position) = default;
+
+    friend bool operator==(const Position &lhs, const Position &rhs) {
+        return lhs.x == rhs.x &&
+               lhs.y == rhs.y;
+    }
+
+    friend bool operator!=(const Position &lhs, const Position &rhs) {
+        return !(rhs == lhs);
+    }
+
+    ~Position() = default;
+
+    friend std::ostream &operator<<(std::ostream &os, const Position &position) {
+        os << "x: " << position.x << " y: " << position.y;
+        return os;
+    }
 };
 
 

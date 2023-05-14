@@ -20,7 +20,11 @@ private:
     short current_direction;
 
 public:
-    explicit Pacman(const std::string &texture_path);
+    explicit Pacman(const std::string &texture_path, const Position &pos) : Entity(texture_path, pos) {
+        this->animation_timer = 0;
+
+        this->current_direction = direction::RIGHT;
+    }
 
     void update() override;
 

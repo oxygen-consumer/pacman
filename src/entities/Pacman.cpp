@@ -3,17 +3,17 @@
 //
 
 #include "Pacman.hpp"
-
-Pacman::Pacman(const std::string &texture_path) {
-    this->init_texture(texture_path);
-
-    this->animation_timer = 0;
-
-    this->current_direction = direction::RIGHT;
-
-    this->pos.set_x(9);
-    this->pos.set_y(15);
-}
+//
+//Pacman::Pacman(const std::string &texture_path) {
+//    this->init_texture(texture_path);
+//
+//    this->animation_timer = 0;
+//
+//    this->current_direction = direction::RIGHT;
+//
+//    this->pos.set_x(9);
+//    this->pos.set_y(15);
+//}
 
 void Pacman::update() {
     // select a texture based on the current direction and animation stage

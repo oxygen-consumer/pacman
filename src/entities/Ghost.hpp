@@ -6,38 +6,24 @@
 #define PACMAN_GHOST_HPP
 
 #include <utility>
-#include <ostream>
+#include "Entity.hpp"
 
-/*
- * This is very basic, just a skeleton for now
- * This will be used to render and manage ghosts
- * TODO: Delete this shit and implement properly
- * TODO: Enum for ghost colors
- */
-class Ghost {
+class Ghost : Entity {
 private:
-    int _color;
-    int _x;
-    int _y;
-
-    std::pair<int, int> _target;
+    unsigned short color;
 
 public:
-    Ghost(int color, int x, int y);
-    ~Ghost();
+    explicit Ghost(const std::string &texture_path, const Position &pos, unsigned short color) : Entity(texture_path,
+                                                                                                        pos),
+                                                                                                 color{color} {}
 
-    // cc and =
-    Ghost(const Ghost &other);
-    Ghost &operator=(const Ghost &other);
+    void update() override;
 
-    void move();
-    void die();
+    void render(sf::RenderTarget *target) override;
 
-    int get_x();
-    int get_y();
-
-    // << operator cos idk where else to put it (send help)
-    friend std::ostream &operator<<(std::ostream &os, const Ghost &ghost);
+    [[nodiscard]] unsigned short get_color() const {
+        return this->color;
+    }
 };
 
 
