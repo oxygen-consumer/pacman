@@ -17,6 +17,8 @@
  */
 class Game {
 private:
+    bool paused = true;
+
     // Window
     std::shared_ptr<sf::RenderWindow> window;
     sf::VideoMode video_mode{};
@@ -27,7 +29,7 @@ private:
     std::unique_ptr<Pacman> player;
 
     // Map
-    std::unique_ptr<Map> map;
+    std::shared_ptr<Map> map;
 
     void init_map();
 

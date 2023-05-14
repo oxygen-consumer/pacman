@@ -110,3 +110,23 @@ unsigned short Map::get_map_height() {
 unsigned short Map::get_map_width() {
     return MAP_WIDTH;
 }
+
+//void Map::set_cell_empty(unsigned short x, unsigned short y) {
+//    this->map[y][x] = Cell::Empty;
+//}
+
+bool Map::is_cell_wall(unsigned short x, unsigned short y) {
+    return this->map[y][x] == Cell::Wall;
+}
+
+bool Map::is_cell_door(unsigned short x, unsigned short y) {
+    return this->map[y][x] == Cell::Door;
+}
+
+//bool Map::is_cell_coin(unsigned short x, unsigned short y) {
+//    return this->map[y][x] == Cell::Coin;
+//}
+
+//bool Map::is_cell_power_up(unsigned short x, unsigned short y) {
+//    return this->map[y][x] == Cell::PowerUp;
+//}

@@ -17,19 +17,29 @@ private:
     // this will be used later
     // const short death_animation_stages = 12;
 
-    short current_direction;
+    unsigned short current_direction;
+    unsigned short next_direction;
+
+    // Returns true if the move was successful
+    bool move(unsigned short direction);
 
 public:
-    explicit Pacman(const std::string &texture_path, const Position &pos) : Entity(texture_path, pos) {
+    explicit Pacman(const std::string &texture_path, const Position &pos, const std::shared_ptr<Map>& map) : Entity(texture_path, pos, map) {
         this->animation_timer = 0;
 
-        this->current_direction = direction::RIGHT;
+        this->current_direction = direction::DOWN;
+        this->next_direction = direction::DOWN;
+
+        this->update_texture();
     }
 
     void update() override;
 
+    void update_texture();
+
     void render(std::shared_ptr<sf::RenderTarget> target) override;
 
+    void set_direction(short direction);
 };
 
 
