@@ -25,7 +25,7 @@ void Game::init_window() {
 void Game::init_map() {
     this->map = new Map("assets/Images/Map.png");
 
-    this->player = new Pacman("assets/Images/Pacman.png");
+    this->player = new Pacman("assets/Images/Pacman.png", Position{9, 15});
 
     // TODO: Ghosts
 }

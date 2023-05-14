@@ -9,5 +9,5 @@ void Ghost::update() {
 }
 
 void Ghost::render(sf::RenderTarget *target) {
-    // TODO
+    target->draw(this->sprite);
 }
