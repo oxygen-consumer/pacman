@@ -41,26 +41,31 @@ void Pacman::set_direction(short direction) {
 }
 
 void Pacman::move() {
-    // TODO: call collision detection here
-
     double movement_factor = 1.0 / conf::CELL_SIZE;
+    Position next_pos = this->pos;
 
     switch (this->current_direction) {
         case direction::UP: {
-            this->pos.set_y(this->pos.get_y() - movement_factor);
+            next_pos.set_y(this->pos.get_y() - movement_factor);
             break;
         }
         case direction::DOWN: {
-            this->pos.set_y(this->pos.get_y() + movement_factor);
+            next_pos.set_y(this->pos.get_y() + movement_factor);
             break;
         }
         case direction::LEFT: {
-            this->pos.set_x(this->pos.get_x() - movement_factor);
+            next_pos.set_x(this->pos.get_x() - movement_factor);
             break;
         }
         case direction::RIGHT: {
-            this->pos.set_x(this->pos.get_x() + movement_factor);
+            next_pos.set_x(this->pos.get_x() + movement_factor);
             break;
         }
     }
+
+    if (CollisionDetection::is_collision(next_pos, this->map)) {
+        return;
+    }
+
+    this->pos = next_pos;
 }

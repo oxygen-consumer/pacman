@@ -9,10 +9,12 @@
 #include <array>
 #include <string>
 #include <memory>
+#include <cmath>
 #include <SFML/Graphics.hpp>
 #include "../../../config.hpp"
 #include "../../exceptions/FileNotFound.hpp"
 #include "../../exceptions/InvalidMap.hpp"
+#include "../../utils/Position.hpp"
 
 
 class Map {
@@ -72,6 +74,16 @@ public:
         Coin,
         PowerUp
     };
+
+    void set_cell_empty(unsigned short x, unsigned short y);
+
+    bool is_cell_wall(unsigned short x, unsigned short y);
+
+    bool is_cell_door(unsigned short x, unsigned short y);
+
+    bool is_cell_coin(unsigned short x, unsigned short y);
+
+    bool is_cell_power_up(unsigned short x, unsigned short y);
 };
 
 

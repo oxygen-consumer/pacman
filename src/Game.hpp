@@ -27,7 +27,7 @@ private:
     std::unique_ptr<Pacman> player;
 
     // Map
-    std::unique_ptr<Map> map;
+    std::shared_ptr<Map> map;
 
     void init_map();
 

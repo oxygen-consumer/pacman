@@ -19,9 +19,9 @@ void Game::init_window() {
 }
 
 void Game::init_map() {
-    this->map = std::make_unique<Map>("assets/Images/Map.png");
+    this->map = std::make_shared<Map>("assets/Images/Map.png");
 
-    this->player = std::make_unique<Pacman>("assets/Images/Pacman.png", Position{9, 15});
+    this->player = std::make_unique<Pacman>("assets/Images/Pacman.png", Position{9, 15}, this->map);
 
     // TODO: Ghosts
 }
