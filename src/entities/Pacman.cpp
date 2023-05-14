@@ -68,6 +68,13 @@ bool Pacman::move(unsigned short direction) {
         }
     }
 
+    // Handle teleportation
+    if (next_pos.get_x() < 0) {
+        next_pos.set_x(this->map->get_map_width() - 1);
+    } else if (next_pos.get_x() >= this->map->get_map_width() - 1) {
+        next_pos.set_x(0);
+    }
+
     if (CollisionDetection::is_collision(next_pos, this->map)) {
         return false;
     }
