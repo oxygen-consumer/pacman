@@ -20,6 +20,6 @@ void Pacman::update() {
     this->sprite.setPosition(this->pos.get_x() * conf::CELL_SIZE_SCALED, this->pos.get_y() * conf::CELL_SIZE_SCALED);
 }
 
-void Pacman::render(sf::RenderTarget *target) {
+void Pacman::render(std::shared_ptr<sf::RenderTarget> target) {
     target->draw(this->sprite);
 }

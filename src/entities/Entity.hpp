@@ -8,8 +8,11 @@
 
 #include <SFML/Graphics.hpp>
 #include <ostream>
+#include <utility>
+#include <memory>
 #include "../../config.hpp"
 #include "../utils/Position.hpp"
+#include "../exceptions/FileNotFound.hpp"
 
 
 class Entity {
@@ -31,15 +34,17 @@ protected:
     };
 
 public:
-    Entity(const std::string &texture_path, const Position &pos) : pos(pos), texture_path(texture_path) {
+    Entity(std::string texture_path, const Position &pos) : pos(pos), texture_path(std::move(texture_path)) {
         this->init_texture();
     }
 
     virtual void update() = 0;
 
-    virtual void render(sf::RenderTarget *target) = 0;
+    virtual void render(std::shared_ptr<sf::RenderTarget> target) = 0;
 
     friend std::ostream &operator<<(std::ostream &os, const Entity &entity);
+
+    virtual ~Entity() = default;
 };
 
 

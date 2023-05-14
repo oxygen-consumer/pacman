@@ -8,8 +8,11 @@
 
 #include <array>
 #include <string>
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include "../../../config.hpp"
+#include "../../exceptions/FileNotFound.hpp"
+#include "../../exceptions/InvalidMap.hpp"
 
 
 class Map {
@@ -47,7 +50,7 @@ private:
 
     void init_texture(const std::string &path);
 
-    void draw_map(sf::RenderTarget *target);
+    void draw_map(std::shared_ptr<sf::RenderTarget> target);
 
     void load_map();
 
@@ -56,7 +59,7 @@ public:
 
     void update();
 
-    void render(sf::RenderTarget *target);
+    void render(std::shared_ptr<sf::RenderTarget> target);
 
     static unsigned short get_map_height();
 

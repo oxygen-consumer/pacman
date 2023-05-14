@@ -6,14 +6,13 @@
 
 void Map::init_texture(const std::string &path) {
     if (!this->texture.loadFromFile(path)) {
-        // TODO: throw custom exception
-        throw std::runtime_error("Could not load texture from " + path);
+        throw FileNotFound("Texture file not found: " + path);
     }
     this->sprite.setTexture(this->texture);
     this->sprite.setScale(conf::DISPLAY_SCALE, conf::DISPLAY_SCALE);
 }
 
-void Map::draw_map(sf::RenderTarget *target) {
+void Map::draw_map(std::shared_ptr<sf::RenderTarget> target) {
     for (size_t i = 0; i < MAP_HEIGHT; ++i) {
         for (size_t j = 0; j < MAP_WIDTH; ++j) {
             switch (this->map[i][j]) {
@@ -48,8 +47,7 @@ void Map::draw_map(sf::RenderTarget *target) {
                     break;
                 }
                 default: {
-                    // TODO: throw custom exception
-                    throw std::runtime_error("Invalid cell type");
+                    throw InvalidMap("Invalid map cell at (" + std::to_string(i) + ", " + std::to_string(j) + ")");
                 }
             }
 
@@ -69,7 +67,7 @@ void Map::update() {
 
 }
 
-void Map::render(sf::RenderTarget *target) {
+void Map::render(std::shared_ptr<sf::RenderTarget> target) {
     this->draw_map(target);
 }
 
@@ -77,24 +75,29 @@ void Map::load_map() {
     for (size_t i = 0; i < MAP_HEIGHT; ++i) {
         for (size_t j = 0; j < MAP_WIDTH; ++j) {
             switch (this->map_default[i][j]) {
-                case '#':
+                case '#': {
                     this->map[i][j] = Cell::Wall;
                     break;
-                case '.':
+                }
+                case '.': {
                     this->map[i][j] = Cell::Coin;
                     break;
-                case 'o':
+                }
+                case 'o': {
                     this->map[i][j] = Cell::PowerUp;
                     break;
-                case ' ':
+                }
+                case ' ': {
                     this->map[i][j] = Cell::Empty;
                     break;
-                case '=':
+                }
+                case '=': {
                     this->map[i][j] = Cell::Door;
                     break;
-                default:
-                    // TODO: throw custom exception
-                    throw std::runtime_error("Invalid character in map");
+                }
+                default: {
+                    throw InvalidMap("Invalid map cell at (" + std::to_string(i) + ", " + std::to_string(j) + ")");
+                }
             }
         }
     }

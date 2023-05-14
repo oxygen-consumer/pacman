@@ -18,16 +18,16 @@
 class Game {
 private:
     // Window
-    sf::RenderWindow *window;
+    std::shared_ptr<sf::RenderWindow> window;
     sf::VideoMode video_mode{};
 
     void init_window();
 
     // Entities
-    Pacman *player;
+    std::unique_ptr<Pacman> player;
 
     // Map
-    Map *map;
+    std::unique_ptr<Map> map;
 
     void init_map();
 
@@ -45,7 +45,7 @@ public:
 
     void operator=(const Game &other) = delete;
 
-    ~Game();
+    ~Game() = default;
 
     inline static Game &get_instance() {
         static Game instance;

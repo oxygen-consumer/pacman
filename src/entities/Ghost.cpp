@@ -8,6 +8,6 @@ void Ghost::update() {
     // TODO
 }
 
-void Ghost::render(sf::RenderTarget *target) {
+void Ghost::render(std::shared_ptr<sf::RenderTarget> target) {
     target->draw(this->sprite);
 }

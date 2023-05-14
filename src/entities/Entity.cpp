@@ -6,8 +6,7 @@
 
 void Entity::init_texture() {
     if (!this->texture.loadFromFile(this->texture_path)) {
-        // TODO: throw custom exception
-        throw std::runtime_error("Could not load texture from " + this->texture_path);
+        throw FileNotFound("Texture file not found: " + this->texture_path);
     }
     this->sprite.setTexture(this->texture);
     this->sprite.setScale(conf::DISPLAY_SCALE, conf::DISPLAY_SCALE);

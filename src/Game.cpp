@@ -10,22 +10,18 @@ Game::Game() {
     this->init_map();
 }
 
-Game::~Game() {
-    delete this->window;
-}
-
 void Game::init_window() {
     this->video_mode = sf::VideoMode(conf::CELL_SIZE_SCALED * Map::get_map_width(),
                                      conf::CELL_SIZE_SCALED * Map::get_map_height());
-    this->window = new sf::RenderWindow(this->video_mode, "Pacman", sf::Style::Titlebar | sf::Style::Close);
+    this->window = std::make_shared<sf::RenderWindow>(this->video_mode, "Pacman", sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(60);
     this->window->setVerticalSyncEnabled(false);
 }
 
 void Game::init_map() {
-    this->map = new Map("assets/Images/Map.png");
+    this->map = std::make_unique<Map>("assets/Images/Map.png");
 
-    this->player = new Pacman("assets/Images/Pacman.png", Position{9, 15});
+    this->player = std::make_unique<Pacman>("assets/Images/Pacman.png", Position{9, 15});
 
     // TODO: Ghosts
 }
