@@ -87,7 +87,7 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} main.cpp src/Game.hpp src/Game.cpp)
+add_executable(${PROJECT_NAME} main.cpp src/Game.hpp src/Game.cpp src/entities/Pacman.cpp src/entities/Pacman.hpp src/entities/Ghost.cpp src/entities/Ghost.hpp src/entities/Entity.hpp src/entities/Entity.cpp config.hpp src/interface/Interface.cpp src/interface/Interface.hpp src/interface/map/Map.cpp src/interface/map/Map.hpp src/interface/map/CollisionChecker.cpp src/interface/map/CollisionChecker.hpp src/utils/Position.hpp)
 
 ###############################################################################
 
@@ -134,5 +134,6 @@ endif()
 # copy binaries to "bin" folder; these are uploaded as artifacts on each release
 # update name in .github/workflows/cmake.yml:29 when changing "bin" name here
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+install(DIRECTORY assets DESTINATION bin)
 # install(DIRECTORY some_dir1 some_dir2 DESTINATION bin)
 # install(FILES some_file1.txt some_file2.md DESTINATION bin)
