@@ -14,7 +14,7 @@ void Game::init_window() {
     this->video_mode = sf::VideoMode(conf::CELL_SIZE_SCALED * Map::get_map_width(),
                                      conf::CELL_SIZE_SCALED * Map::get_map_height());
     this->window = std::make_shared<sf::RenderWindow>(this->video_mode, "Pacman", sf::Style::Titlebar | sf::Style::Close);
-    this->window->setFramerateLimit(60);
+    this->window->setFramerateLimit(conf::FPS);
     this->window->setVerticalSyncEnabled(false);
 }
 
@@ -66,11 +66,38 @@ void Game::poll_events() {
 
             case sf::Event::KeyPressed:
                 switch (ev.key.code) {
-                    case sf::Keyboard::Escape:
+                    // quit the game
+                    case sf::Keyboard::Escape: {
                         this->window->close();
                         break;
-                    default:
+                    }
+                    // pause the game
+                    case sf::Keyboard::P: {
+                        // TODO
                         break;
+                    }
+
+                    // move the player
+                    case sf::Keyboard::Up: {
+                        this->player->set_direction(Entity::direction::UP);
+                        break;
+                    }
+                    case sf::Keyboard::Down: {
+                        this->player->set_direction(Entity::direction::DOWN);
+                        break;
+                    }
+                    case sf::Keyboard::Left: {
+                        this->player->set_direction(Entity::direction::LEFT);
+                        break;
+                    }
+                    case sf::Keyboard::Right: {
+                        this->player->set_direction(Entity::direction::RIGHT);
+                        break;
+                    }
+
+                    default: {
+                        break;
+                    }
                 }
 
             default:

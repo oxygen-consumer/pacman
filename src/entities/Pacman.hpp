@@ -30,6 +30,9 @@ public:
 
     void render(std::shared_ptr<sf::RenderTarget> target) override;
 
+    void set_direction(short direction);
+
+    void move();
 };
 
 

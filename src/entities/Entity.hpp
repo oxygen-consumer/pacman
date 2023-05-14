@@ -26,13 +26,6 @@ protected:
 
     void init_texture();
 
-    enum direction {
-        RIGHT,
-        UP,
-        LEFT,
-        DOWN
-    };
-
 public:
     Entity(std::string texture_path, const Position &pos) : pos(pos), texture_path(std::move(texture_path)) {
         this->init_texture();
@@ -45,6 +38,13 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const Entity &entity);
 
     virtual ~Entity() = default;
+
+    enum direction {
+        RIGHT,
+        UP,
+        LEFT,
+        DOWN
+    };
 };
 
 

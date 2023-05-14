@@ -5,6 +5,8 @@
 #include "Pacman.hpp"
 
 void Pacman::update() {
+    move();
+
     // select a texture based on the current direction and animation stage
     short animation_stage = this->animation_timer / conf::ANIMATION_SPEED;
     this->sprite.setTextureRect(
@@ -22,4 +24,43 @@ void Pacman::update() {
 
 void Pacman::render(std::shared_ptr<sf::RenderTarget> target) {
     target->draw(this->sprite);
+}
+
+void Pacman::set_direction(short direction) {
+    // can't go back
+    if ((this->current_direction == direction::UP && direction == direction::DOWN) ||
+        (this->current_direction == direction::DOWN && direction == direction::UP) ||
+        (this->current_direction == direction::LEFT && direction == direction::RIGHT) ||
+        (this->current_direction == direction::RIGHT && direction == direction::LEFT)) {
+        return;
+    }
+
+    // TODO: call collision detection here
+
+    this->current_direction = direction;
+}
+
+void Pacman::move() {
+    // TODO: call collision detection here
+
+    double movement_factor = 1.0 / conf::CELL_SIZE;
+
+    switch (this->current_direction) {
+        case direction::UP: {
+            this->pos.set_y(this->pos.get_y() - movement_factor);
+            break;
+        }
+        case direction::DOWN: {
+            this->pos.set_y(this->pos.get_y() + movement_factor);
+            break;
+        }
+        case direction::LEFT: {
+            this->pos.set_x(this->pos.get_x() - movement_factor);
+            break;
+        }
+        case direction::RIGHT: {
+            this->pos.set_x(this->pos.get_x() + movement_factor);
+            break;
+        }
+    }
 }

@@ -10,7 +10,7 @@
 
 class Position {
 private:
-    unsigned short x, y;
+    double x, y;
 
 public:
     explicit Position() {
@@ -18,21 +18,21 @@ public:
         this->y = 0;
     }
 
-    explicit Position(unsigned short x, unsigned short y) : x{x}, y{y} {}
+    explicit Position(double x, double y) : x{x}, y{y} {}
 
-    [[nodiscard]] unsigned short get_x() const {
+    [[nodiscard]] double get_x() const {
         return this->x;
     }
 
-    void set_x(unsigned short x_) {
+    void set_x(double x_) {
         this->x = x_;
     }
 
-    void set_y(unsigned short y_) {
+    void set_y(double y_) {
         this->y = y_;
     }
 
-    [[nodiscard]] unsigned short get_y() const {
+    [[nodiscard]] double get_y() const {
         return this->y;
     };
 
