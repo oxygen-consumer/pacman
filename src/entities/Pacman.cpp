@@ -5,7 +5,11 @@
 #include "Pacman.hpp"
 
 void Pacman::update() {
-    move();
+    if (!move(next_direction)) {
+        move(current_direction);
+    } else {
+        current_direction = next_direction;
+    }
 
     // select a texture based on the current direction and animation stage
     short animation_stage = this->animation_timer / conf::ANIMATION_SPEED;
@@ -35,16 +39,14 @@ void Pacman::set_direction(short direction) {
         return;
     }
 
-    // TODO: call collision detection here
-
-    this->current_direction = direction;
+    this->next_direction = direction;
 }
 
-void Pacman::move() {
+bool Pacman::move(unsigned short direction) {
     double movement_factor = 1.0 / conf::CELL_SIZE;
     Position next_pos = this->pos;
 
-    switch (this->current_direction) {
+    switch (direction) {
         case direction::UP: {
             next_pos.set_y(this->pos.get_y() - movement_factor);
             break;
@@ -61,11 +63,15 @@ void Pacman::move() {
             next_pos.set_x(this->pos.get_x() + movement_factor);
             break;
         }
+        default: {
+            break;
+        }
     }
 
     if (CollisionDetection::is_collision(next_pos, this->map)) {
-        return;
+        return false;
     }
 
     this->pos = next_pos;
+    return true;
 }
