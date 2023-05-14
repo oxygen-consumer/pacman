@@ -17,6 +17,8 @@
  */
 class Game {
 private:
+    bool paused = true;
+
     // Window
     std::shared_ptr<sf::RenderWindow> window;
     sf::VideoMode video_mode{};

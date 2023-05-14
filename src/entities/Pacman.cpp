@@ -11,6 +11,10 @@ void Pacman::update() {
         current_direction = next_direction;
     }
 
+    this->update_texture();
+}
+
+void Pacman::update_texture() {
     // select a texture based on the current direction and animation stage
     short animation_stage = this->animation_timer / conf::ANIMATION_SPEED;
     this->sprite.setTextureRect(

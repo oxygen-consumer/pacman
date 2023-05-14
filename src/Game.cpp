@@ -40,6 +40,10 @@ void Game::run() {
 void Game::update() {
     poll_events();
 
+    if (paused) {
+        return;
+    }
+
     this->map->update();
 
     this->player->update();
@@ -73,25 +77,51 @@ void Game::poll_events() {
                     }
                     // pause the game
                     case sf::Keyboard::P: {
-                        // TODO
+                        paused = !paused;
                         break;
                     }
 
-                    // move the player
+                    // move the player with the arrow keys
                     case sf::Keyboard::Up: {
                         this->player->set_direction(Entity::direction::UP);
+                        paused = false;
                         break;
                     }
                     case sf::Keyboard::Down: {
                         this->player->set_direction(Entity::direction::DOWN);
+                        paused = false;
                         break;
                     }
                     case sf::Keyboard::Left: {
                         this->player->set_direction(Entity::direction::LEFT);
+                        paused = false;
                         break;
                     }
                     case sf::Keyboard::Right: {
                         this->player->set_direction(Entity::direction::RIGHT);
+                        paused = false;
+                        break;
+                    }
+
+                    // move the player with WASD
+                    case sf::Keyboard::W: {
+                        this->player->set_direction(Entity::direction::UP);
+                        paused = false;
+                        break;
+                    }
+                    case sf::Keyboard::S: {
+                        this->player->set_direction(Entity::direction::DOWN);
+                        paused = false;
+                        break;
+                    }
+                    case sf::Keyboard::A: {
+                        this->player->set_direction(Entity::direction::LEFT);
+                        paused = false;
+                        break;
+                    }
+                    case sf::Keyboard::D: {
+                        this->player->set_direction(Entity::direction::RIGHT);
+                        paused = false;
                         break;
                     }
 

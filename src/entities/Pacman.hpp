@@ -27,11 +27,15 @@ public:
     explicit Pacman(const std::string &texture_path, const Position &pos, const std::shared_ptr<Map>& map) : Entity(texture_path, pos, map) {
         this->animation_timer = 0;
 
-        this->current_direction = direction::RIGHT;
-        this->next_direction = direction::RIGHT;
+        this->current_direction = direction::DOWN;
+        this->next_direction = direction::DOWN;
+
+        this->update_texture();
     }
 
     void update() override;
+
+    void update_texture();
 
     void render(std::shared_ptr<sf::RenderTarget> target) override;
 
