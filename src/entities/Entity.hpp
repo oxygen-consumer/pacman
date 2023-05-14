@@ -12,7 +12,7 @@
 #include <memory>
 #include "../../config.hpp"
 #include "../utils/Position.hpp"
-#include "../exceptions/FileNotFound.hpp"
+#include "../utils/exceptions/FileNotFound.hpp"
 #include "../interface/map/Map.hpp"
 #include "../interface/map/CollisionDetection.hpp"
 

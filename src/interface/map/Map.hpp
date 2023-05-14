@@ -9,11 +9,10 @@
 #include <array>
 #include <string>
 #include <memory>
-#include <cmath>
 #include <SFML/Graphics.hpp>
 #include "../../../config.hpp"
-#include "../../exceptions/FileNotFound.hpp"
-#include "../../exceptions/InvalidMap.hpp"
+#include "../../utils/exceptions/FileNotFound.hpp"
+#include "../../utils/exceptions/InvalidMap.hpp"
 #include "../../utils/Position.hpp"
 
 
