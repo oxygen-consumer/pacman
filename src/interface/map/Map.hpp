@@ -75,15 +75,15 @@ public:
         PowerUp
     };
 
-    void set_cell_empty(unsigned short x, unsigned short y);
+    // void set_cell_empty(unsigned short x, unsigned short y);
 
     bool is_cell_wall(unsigned short x, unsigned short y);
 
     bool is_cell_door(unsigned short x, unsigned short y);
 
-    bool is_cell_coin(unsigned short x, unsigned short y);
+    // bool is_cell_coin(unsigned short x, unsigned short y);
 
-    bool is_cell_power_up(unsigned short x, unsigned short y);
+    // bool is_cell_power_up(unsigned short x, unsigned short y);
 };
 
 

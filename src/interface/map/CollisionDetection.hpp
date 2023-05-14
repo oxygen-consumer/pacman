@@ -19,7 +19,7 @@ public:
     is_collision(const Position &position, const std::shared_ptr<Map> &map, bool is_ghost = false) {
         // check for collision with walls
         for (size_t i = 0; i < 4; ++i) {
-            unsigned short x = 0, y = 0;
+            short x = 0, y = 0;
 
             switch (i) {
                 case 0: { // Top left
