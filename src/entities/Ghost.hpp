@@ -13,10 +13,8 @@ private:
     unsigned short color;
 
 public:
-    explicit Ghost(const std::string &texture_path, const Position &pos, const std::shared_ptr<Map> &map,
-                   unsigned short color) : Entity(texture_path,
-                                                  pos, map),
-                                           color{color} {}
+    explicit Ghost(const std::string &texture_path, const Position &pos, unsigned short color) :
+            Entity(texture_path, pos), color{color} {}
 
     void update() override;
 

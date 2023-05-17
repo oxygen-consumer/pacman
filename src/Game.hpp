@@ -26,18 +26,19 @@ private:
     void init_window();
 
     // Entities
-    std::unique_ptr<Pacman> player;
+    std::shared_ptr<Pacman> player;
 
     // Map
     std::shared_ptr<Map> map;
 
-    void init_map();
+    void init_objects();
 
     Game();
 
     // Event handler
     void poll_events();
 
+    // TODO: move update and render to a separate class?
     void update();
 
     void render();

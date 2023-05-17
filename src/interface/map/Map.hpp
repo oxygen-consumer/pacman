@@ -59,8 +59,13 @@ private:
 
     void load_map();
 
-public:
     explicit Map(const std::string &texture_path);
+
+public:
+    inline static std::shared_ptr<Map> &get_instance() {
+        static std::shared_ptr<Map> instance(new Map("assets/Images/Map.png"));
+        return instance;
+    }
 
     void update();
 

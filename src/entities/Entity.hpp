@@ -28,9 +28,9 @@ protected:
     std::string texture_path;
 
 public:
-    Entity(std::string texture_path, const Position &pos, const std::shared_ptr<Map> &map) : pos{pos}, map{map},
-                                                                                             texture_path{std::move(
-                                                                                                     texture_path)} {}
+    Entity(std::string texture_path, const Position &pos) : pos{pos}, texture_path{std::move(texture_path)} {
+        this->map = Map::get_instance();
+    }
 
     virtual void update() = 0;
 
