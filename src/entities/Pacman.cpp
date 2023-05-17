@@ -17,9 +17,7 @@ void Pacman::update() {
 void Pacman::update_texture() {
     // select a texture based on the current direction and animation stage
     short animation_stage = this->animation_timer / conf::ANIMATION_SPEED;
-    this->sprite.setTextureRect(
-            sf::IntRect(animation_stage * conf::CELL_SIZE, current_direction * conf::CELL_SIZE, conf::CELL_SIZE,
-                        conf::CELL_SIZE));
+    this->texture_handler.select_cell("pacman", animation_stage, current_direction);
 
     this->animation_timer++;
     // reset the timer when it reaches the last animation stage
@@ -27,11 +25,11 @@ void Pacman::update_texture() {
         this->animation_timer = 0;
     }
 
-    this->sprite.setPosition(this->pos.get_x() * conf::CELL_SIZE_SCALED, this->pos.get_y() * conf::CELL_SIZE_SCALED);
+    this->texture_handler.set_position("pacman", this->pos);
 }
 
 void Pacman::render(std::shared_ptr<sf::RenderTarget> target) {
-    target->draw(this->sprite);
+    this->texture_handler.render("pacman", target);
 }
 
 void Pacman::set_direction(short direction) {
@@ -46,6 +44,7 @@ void Pacman::set_direction(short direction) {
     this->next_direction = direction;
 }
 
+// TODO: movement in another class?
 bool Pacman::move(unsigned short direction) {
     double movement_factor = 1.0 / conf::CELL_SIZE;
     Position next_pos = this->pos;

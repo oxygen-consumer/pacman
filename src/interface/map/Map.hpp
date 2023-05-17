@@ -7,13 +7,8 @@
 
 
 #include <array>
-#include <string>
-#include <memory>
-#include <SFML/Graphics.hpp>
-#include "../../../config.hpp"
-#include "../../utils/exceptions/FileNotFound.hpp"
 #include "../../utils/exceptions/InvalidMap.hpp"
-#include "../../utils/Position.hpp"
+#include "../../utils/resource_holders/TextureHandler.hpp"
 
 
 class Map {
@@ -46,8 +41,7 @@ private:
             "###################"
     };
 
-    sf::Sprite sprite;
-    sf::Texture texture;
+    TextureHandler<std::string> texture_handler;
 
     void init_texture(const std::string &path);
 
@@ -55,8 +49,13 @@ private:
 
     void load_map();
 
-public:
     explicit Map(const std::string &texture_path);
+
+public:
+    inline static std::shared_ptr<Map> &get_instance() {
+        static std::shared_ptr<Map> instance(new Map("assets/Images/Map.png"));
+        return instance;
+    }
 
     void update();
 

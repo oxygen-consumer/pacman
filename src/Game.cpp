@@ -7,7 +7,7 @@
 
 Game::Game() {
     this->init_window();
-    this->init_map();
+    this->init_objects();
 }
 
 void Game::init_window() {
@@ -18,10 +18,10 @@ void Game::init_window() {
     this->window->setVerticalSyncEnabled(false);
 }
 
-void Game::init_map() {
-    this->map = std::make_shared<Map>("assets/Images/Map.png");
+void Game::init_objects() {
+    this->map = Map::get_instance();
 
-    this->player = std::make_unique<Pacman>("assets/Images/Pacman.png", Position{9, 15}, this->map);
+    this->player = Pacman::get_instance();
 
     // TODO: Ghosts
 }
@@ -50,7 +50,7 @@ void Game::update() {
 }
 
 void Game::render() {
-    this->window->clear(sf::Color(0, 0, 0)); // test purposes
+    this->window->clear(sf::Color(0, 0, 0));
 
     this->map->render(this->window);
 
@@ -59,6 +59,7 @@ void Game::render() {
     this->window->display();
 }
 
+// TODO: move this to a separate class
 void Game::poll_events() {
     static sf::Event ev{};
 

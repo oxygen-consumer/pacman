@@ -1,4 +1,3 @@
-#include <stdexcept>
 #include <iostream>
 #include "src/Game.hpp"
 
@@ -7,6 +6,7 @@
 #include <X11/Xlib.h>
 
 #endif
+
 
 int main() {
 

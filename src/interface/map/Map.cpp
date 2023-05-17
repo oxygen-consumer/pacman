@@ -5,11 +5,7 @@
 #include "Map.hpp"
 
 void Map::init_texture(const std::string &path) {
-    if (!this->texture.loadFromFile(path)) {
-        throw FileNotFound("Texture file not found: " + path);
-    }
-    this->sprite.setTexture(this->texture);
-    this->sprite.setScale(conf::DISPLAY_SCALE, conf::DISPLAY_SCALE);
+    this->texture_handler.load("map", path);
 }
 
 void Map::draw_map(std::shared_ptr<sf::RenderTarget> target) {
@@ -22,28 +18,23 @@ void Map::draw_map(std::shared_ptr<sf::RenderTarget> target) {
                     bool left = j > 0 && this->map[i][j - 1] == Cell::Wall;
                     bool right = j < MAP_WIDTH - 1 && this->map[i][j + 1] == Cell::Wall;
 
-                    // I have no fucking idea how this formula works
-                    sprite.setTextureRect(sf::IntRect(conf::CELL_SIZE * (down + 2 * (left + 2 * (right + 2 * up))), 0,
-                                                      conf::CELL_SIZE, conf::CELL_SIZE));
+                    this->texture_handler.select_cell("map", down + 2 * (left + 2 * (right + 2 * up)), 0);
                     break;
                 }
                 case Cell::Coin: {
-                    this->sprite.setTextureRect(sf::IntRect(0, conf::CELL_SIZE, conf::CELL_SIZE, conf::CELL_SIZE));
+                    this->texture_handler.select_cell("map", 0, 1);
                     break;
                 }
                 case Cell::PowerUp: {
-                    this->sprite.setTextureRect(
-                            sf::IntRect(conf::CELL_SIZE, conf::CELL_SIZE, conf::CELL_SIZE, conf::CELL_SIZE));
+                    this->texture_handler.select_cell("map", 1, 1);
                     break;
                 }
                 case Cell::Empty: {
-                    this->sprite.setTextureRect(
-                            sf::IntRect(3 * conf::CELL_SIZE, conf::CELL_SIZE, conf::CELL_SIZE, conf::CELL_SIZE));
+                    this->texture_handler.select_cell("map", 3, 1);
                     break;
                 }
                 case Cell::Door: {
-                    this->sprite.setTextureRect(
-                            sf::IntRect(2 * conf::CELL_SIZE, conf::CELL_SIZE, conf::CELL_SIZE, conf::CELL_SIZE));
+                    this->texture_handler.select_cell("map", 2, 1);
                     break;
                 }
                 default: {
@@ -51,8 +42,8 @@ void Map::draw_map(std::shared_ptr<sf::RenderTarget> target) {
                 }
             }
 
-            this->sprite.setPosition(j * conf::CELL_SIZE_SCALED, i * conf::CELL_SIZE_SCALED);
-            target->draw(this->sprite);
+            this->texture_handler.set_position("map", Position{static_cast<double>(j), static_cast<double>(i)});
+            this->texture_handler.render("map", target);
         }
     }
 }

@@ -8,9 +8,6 @@
 
 #include <cmath>
 #include "Map.hpp"
-#include "../../entities/Entity.hpp"
-#include "../../utils/Position.hpp"
-#include "../../../config.hpp"
 
 
 class CollisionDetection {

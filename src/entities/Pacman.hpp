@@ -23,14 +23,21 @@ private:
     // Returns true if the move was successful
     bool move(unsigned short direction);
 
-public:
-    explicit Pacman(const std::string &texture_path, const Position &pos, const std::shared_ptr<Map>& map) : Entity(texture_path, pos, map) {
+    explicit Pacman(const std::string &texture_path, const Position &pos) : Entity(texture_path, pos) {
+        this->texture_handler.load("pacman", this->texture_path);
+
         this->animation_timer = 0;
 
         this->current_direction = direction::DOWN;
         this->next_direction = direction::DOWN;
 
         this->update_texture();
+    }
+
+public:
+    inline static std::shared_ptr<Pacman> get_instance() {
+        static std::shared_ptr<Pacman> instance(new Pacman("assets/Images/Pacman.png", Position{9, 15}));
+        return instance;
     }
 
     void update() override;

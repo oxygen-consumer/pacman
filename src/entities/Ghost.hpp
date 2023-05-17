@@ -5,22 +5,22 @@
 #ifndef PACMAN_GHOST_HPP
 #define PACMAN_GHOST_HPP
 
-#include <utility>
+
 #include "Entity.hpp"
+
 
 class Ghost : Entity {
 private:
     unsigned short color;
 
 public:
-    explicit Ghost(const std::string &texture_path, const Position &pos, const std::shared_ptr<Map> &map,
-                   unsigned short color) : Entity(texture_path,
-                                                  pos, map),
-                                           color{color} {}
+    explicit Ghost(const std::string &texture_path, const Position &pos, unsigned short color) :
+            Entity(texture_path, pos), color{color} {}
 
     void update() override;
 
-    void render(std::shared_ptr<sf::RenderTarget> target) override;
+    // Will be implemented later
+    void render(std::shared_ptr<sf::RenderTarget> target) override = 0;
 
     [[nodiscard]] unsigned short get_color() const {
         return this->color;
