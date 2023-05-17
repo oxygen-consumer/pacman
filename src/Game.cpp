@@ -50,7 +50,7 @@ void Game::update() {
 }
 
 void Game::render() {
-    this->window->clear(sf::Color(0, 0, 0)); // test purposes
+    this->window->clear(sf::Color(0, 0, 0));
 
     this->map->render(this->window);
 

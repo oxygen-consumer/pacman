@@ -41,10 +41,6 @@ private:
             "###################"
     };
 
-    /*
-    sf::Sprite sprite;
-    sf::Texture texture;
-     */
     TextureHandler<std::string> texture_handler;
 
     void init_texture(const std::string &path);
