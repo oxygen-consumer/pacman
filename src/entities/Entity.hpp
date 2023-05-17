@@ -15,26 +15,22 @@
 #include "../utils/exceptions/FileNotFound.hpp"
 #include "../interface/map/Map.hpp"
 #include "../interface/map/CollisionDetection.hpp"
+#include "../utils/resource_holders/TextureHandler.hpp"
 
 
 class Entity {
 protected:
-    sf::Sprite sprite;
-    sf::Texture texture;
+    TextureHandler<std::string> texture_handler;
 
     Position pos;
     std::shared_ptr<Map> map;
 
     std::string texture_path;
 
-    void init_texture();
-
 public:
     Entity(std::string texture_path, const Position &pos, const std::shared_ptr<Map> &map) : pos{pos}, map{map},
                                                                                              texture_path{std::move(
-                                                                                                     texture_path)} {
-        this->init_texture();
-    }
+                                                                                                     texture_path)} {}
 
     virtual void update() = 0;
 

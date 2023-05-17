@@ -14,6 +14,7 @@
 #include "../../utils/exceptions/FileNotFound.hpp"
 #include "../../utils/exceptions/InvalidMap.hpp"
 #include "../../utils/Position.hpp"
+#include "../../utils/resource_holders/TextureHandler.hpp"
 
 
 class Map {
@@ -46,8 +47,11 @@ private:
             "###################"
     };
 
+    /*
     sf::Sprite sprite;
     sf::Texture texture;
+     */
+    TextureHandler<std::string> texture_handler;
 
     void init_texture(const std::string &path);
 

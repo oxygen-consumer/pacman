@@ -20,7 +20,8 @@ public:
 
     void update() override;
 
-    void render(std::shared_ptr<sf::RenderTarget> target) override;
+    // Will be implemented later
+    void render(std::shared_ptr<sf::RenderTarget> target) override = 0;
 
     [[nodiscard]] unsigned short get_color() const {
         return this->color;
