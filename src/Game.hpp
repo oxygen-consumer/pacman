@@ -5,16 +5,10 @@
 #ifndef PACMAN_GAME_HPP
 #define PACMAN_GAME_HPP
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
+
 #include "entities/Pacman.hpp"
-#include "interface/map/Map.hpp"
 
 
-/*
- * Game engine
- * Singleton WITHOUT thread safety (not needed)
- */
 class Game {
 private:
     bool paused = true;

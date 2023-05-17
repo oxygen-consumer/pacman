@@ -5,8 +5,9 @@
 #ifndef PACMAN_GHOST_HPP
 #define PACMAN_GHOST_HPP
 
-#include <utility>
+
 #include "Entity.hpp"
+
 
 class Ghost : Entity {
 private:

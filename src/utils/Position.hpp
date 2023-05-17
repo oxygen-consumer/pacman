@@ -6,8 +6,6 @@
 #define PACMAN_POSITION_HPP
 
 
-#include <ostream>
-
 class Position {
 private:
     double x, y;

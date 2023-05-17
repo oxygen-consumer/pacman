@@ -6,16 +6,8 @@
 #define PACMAN_ENTITY_HPP
 
 
-#include <SFML/Graphics.hpp>
-#include <ostream>
-#include <utility>
-#include <memory>
-#include "../../config.hpp"
-#include "../utils/Position.hpp"
-#include "../utils/exceptions/FileNotFound.hpp"
 #include "../interface/map/Map.hpp"
 #include "../interface/map/CollisionDetection.hpp"
-#include "../utils/resource_holders/TextureHandler.hpp"
 
 
 class Entity {

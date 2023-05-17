@@ -7,13 +7,7 @@
 
 
 #include <array>
-#include <string>
-#include <memory>
-#include <SFML/Graphics.hpp>
-#include "../../../config.hpp"
-#include "../../utils/exceptions/FileNotFound.hpp"
 #include "../../utils/exceptions/InvalidMap.hpp"
-#include "../../utils/Position.hpp"
 #include "../../utils/resource_holders/TextureHandler.hpp"
 
 
