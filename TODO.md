@@ -44,7 +44,7 @@
 ## Tema 3
 
 #### Cerințe
-- [ ] 2 șabloane de proiectare (design patterns)
+- [X] 2 șabloane de proiectare (design patterns)
 - [X] o funcție șablon (template) cu sens; minim 2 instanțieri
 - [X] o clasă șablon cu sens; minim 2 instanțieri
 <!-- - [ ] o specializare pe funcție/clasă șablon -->
