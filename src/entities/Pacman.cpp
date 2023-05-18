@@ -90,6 +90,11 @@ bool Pacman::move(unsigned short direction) {
         this->map->set_cell_empty(current_cell.first, current_cell.second);
         this->interface->add_score(10);
     }
+    if (this->map->is_cell_power_up(current_cell.first, current_cell.second)) {
+        this->map->set_cell_empty(current_cell.first, current_cell.second);
+        this->interface->add_score(50);
+        // TODO: implement power up
+    }
 
     return true;
 }
