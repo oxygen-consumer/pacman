@@ -7,10 +7,13 @@
 
 
 #include "Entity.hpp"
+#include "../interface/Interface.hpp"
 
 
 class Pacman : Entity {
 private:
+    std::shared_ptr<Interface> interface;
+
     // animation stuff
     short animation_timer;
     const short animation_stages = 6;
@@ -32,6 +35,8 @@ private:
         this->next_direction = direction::DOWN;
 
         this->update_texture();
+
+        this->interface = Interface::get_instance();
     }
 
 public:

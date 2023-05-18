@@ -12,7 +12,7 @@ Game::Game() {
 
 void Game::init_window() {
     this->video_mode = sf::VideoMode(conf::CELL_SIZE_SCALED * Map::get_map_width(),
-                                     conf::CELL_SIZE_SCALED * Map::get_map_height());
+                                     conf::CELL_SIZE_SCALED * (Map::get_map_height() + 1));
     this->window = std::make_shared<sf::RenderWindow>(this->video_mode, "Pacman", sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(conf::FPS);
     this->window->setVerticalSyncEnabled(false);
@@ -20,6 +20,7 @@ void Game::init_window() {
 
 void Game::init_objects() {
     this->map = Map::get_instance();
+    this->interface = Interface::get_instance();
 
     this->player = Pacman::get_instance();
 
@@ -40,6 +41,8 @@ void Game::run() {
 void Game::update() {
     poll_events();
 
+    this->interface->update(this->paused);
+
     if (paused) {
         return;
     }
@@ -53,6 +56,7 @@ void Game::render() {
     this->window->clear(sf::Color(0, 0, 0));
 
     this->map->render(this->window);
+    this->interface->render(this->window);
 
     this->player->render(this->window);
 

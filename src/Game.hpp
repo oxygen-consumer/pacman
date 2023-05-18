@@ -24,6 +24,7 @@ private:
 
     // Map
     std::shared_ptr<Map> map;
+    std::shared_ptr<Interface> interface;
 
     void init_objects();
 
