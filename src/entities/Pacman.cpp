@@ -78,10 +78,18 @@ bool Pacman::move(unsigned short direction) {
         next_pos.set_x(0);
     }
 
-    if (CollisionDetection::is_collision(next_pos, this->map)) {
+    if (CollisionDetection::is_collision(next_pos)) {
         return false;
     }
 
     this->pos = next_pos;
+
+    // collectibles
+    std::pair<int, int> current_cell = CollisionDetection::get_current_cell(this->pos);
+    if (this->map->is_cell_coin(current_cell.first, current_cell.second)) {
+        this->map->set_cell_empty(current_cell.first, current_cell.second);
+        this->interface->add_score(10);
+    }
+
     return true;
 }

@@ -13,7 +13,9 @@
 class CollisionDetection {
 public:
     static bool
-    is_collision(const Position &position, const std::shared_ptr<Map> &map, bool is_ghost = false) {
+    is_collision(const Position &position, bool is_ghost = false) {
+        static std::shared_ptr<Map> map = Map::get_instance();
+
         // check for collision with walls
         for (size_t i = 0; i < 4; ++i) {
             short x = 0, y = 0;
@@ -55,6 +57,10 @@ public:
         }
 
         return false;
+    }
+
+    static std::pair<int, int> get_current_cell(const Position &pos) {
+        return std::make_pair(static_cast<int>(std::round(pos.get_x())), static_cast<int>(std::round(pos.get_y())));
     }
 };
 
