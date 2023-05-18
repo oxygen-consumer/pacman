@@ -38,7 +38,7 @@
 - [X] funcții și atribute `static`
 - [X] STL
 - [X] cât mai multe `const`
-- [ ] la sfârșit: commit separat cu adăugarea unei noi derivate fără a modifica restul codului
+- [X] la sfârșit: commit separat cu adăugarea unei noi derivate fără a modifica restul codului
 - [ ] tag de `git`: de exemplu `v0.2`
 
 ## Tema 3
@@ -48,4 +48,4 @@
 - [X] o funcție șablon (template) cu sens; minim 2 instanțieri
 - [X] o clasă șablon cu sens; minim 2 instanțieri
 <!-- - [ ] o specializare pe funcție/clasă șablon -->
-- [ ] tag de `git`: de exemplu `v0.3` sau `v1.0`
+- [X] tag de `git`: de exemplu `v0.3` sau `v1.0`
