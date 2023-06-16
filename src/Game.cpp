@@ -13,7 +13,8 @@ Game::Game() {
 void Game::init_window() {
     this->video_mode = sf::VideoMode(conf::CELL_SIZE_SCALED * Map::get_map_width(),
                                      conf::CELL_SIZE_SCALED * (Map::get_map_height() + 1));
-    this->window = std::make_shared<sf::RenderWindow>(this->video_mode, "Pacman", sf::Style::Titlebar | sf::Style::Close);
+    this->window = std::make_shared<sf::RenderWindow>(this->video_mode, "Pacman",
+                                                      sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(conf::FPS);
     this->window->setVerticalSyncEnabled(false);
 }
@@ -69,74 +70,61 @@ void Game::poll_events() {
 
     while (this->window->pollEvent(ev)) {
         switch (ev.type) {
-            case sf::Event::Closed:
+            case sf::Event::Closed: {
                 this->window->close();
                 break;
+            }
 
-            case sf::Event::KeyPressed:
+            case sf::Event::KeyPressed: {
                 switch (ev.key.code) {
                     // quit the game
                     case sf::Keyboard::Escape: {
                         this->window->close();
                         break;
                     }
+
                     // pause the game
                     case sf::Keyboard::P: {
                         paused = !paused;
                         break;
                     }
 
-                    // move the player with the arrow keys
-                    case sf::Keyboard::Up: {
-                        this->player->set_direction(Entity::direction::UP);
-                        paused = false;
-                        break;
-                    }
-                    case sf::Keyboard::Down: {
-                        this->player->set_direction(Entity::direction::DOWN);
-                        paused = false;
-                        break;
-                    }
-                    case sf::Keyboard::Left: {
-                        this->player->set_direction(Entity::direction::LEFT);
-                        paused = false;
-                        break;
-                    }
-                    case sf::Keyboard::Right: {
-                        this->player->set_direction(Entity::direction::RIGHT);
-                        paused = false;
-                        break;
-                    }
-
-                    // move the player with WASD
+                    // move the player
+                    case sf::Keyboard::Up:
                     case sf::Keyboard::W: {
                         this->player->set_direction(Entity::direction::UP);
                         paused = false;
                         break;
                     }
+                    case sf::Keyboard::Down:
                     case sf::Keyboard::S: {
                         this->player->set_direction(Entity::direction::DOWN);
                         paused = false;
                         break;
                     }
+                    case sf::Keyboard::Left:
                     case sf::Keyboard::A: {
                         this->player->set_direction(Entity::direction::LEFT);
                         paused = false;
                         break;
                     }
+                    case sf::Keyboard::Right:
                     case sf::Keyboard::D: {
                         this->player->set_direction(Entity::direction::RIGHT);
                         paused = false;
                         break;
                     }
 
+                    // unknown key
                     default: {
                         break;
                     }
                 }
+            }
 
-            default:
+            default: {
                 break;
+            }
         }
     }
 }
